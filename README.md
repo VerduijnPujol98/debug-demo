@@ -1,24 +1,23 @@
-[![CI](https://github.com/tkgregory/debug-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/tkgregory/debug-demo/actions/workflows/ci.yml)
+#Opgave 1
 
-Battleship game to demonstrate debugging. 
+The reason why it's returning vertical points is because the integer in the line;
+new Random().nextInt(maxValue); only returns 0 when the max value is 1.
 
-Check out the YouTube video for full details. 👇<br/>
-[<img src="YouTube thumbail.png" width="500"/>](https://youtu.be/IeUZZoZE3sU)
+To fix it, we rewrite the code to;
+return new Random().nextInt(maxValue + 1);
 
-## How to play
 
-Run the `main` method inside [BattleshipGame](src/main/java/com/tomgregory/BattleshipGame.java) to initiate these steps:
+#Opgave 2
+We never get the message because of this line;
+return hitCount > BATTLESHIP_LENGTH;
 
-1. Setup a square board with one battleship
-2. Create a player
-3. Play the game until the ship is sunk or player runs out of turns
+Even when the hitcounts hit 3, it keeps going since the hitcount has to be bigger
+then the battleship length, which itself is 3.
 
-The battleship location is revealed at the end.
+So we should change it to; return hitCount >= BATTLESHIP_LENGTH;
 
-## Bugs to find
 
-Use IntelliJ IDEA debug to solve these issues:
 
-1. Why does the board only add horizontal but not vertical battleships?
-2. Why do we never get message *Ship sunk!* when log output shows 3 direct hits?
-3. Why do we sometimes see `java.lang.ArrayIndexOutOfBoundsException`?
+#Opgave 3
+Because the endpoints are not in boundary, because the maximum index for the array
+is going to be 9 not 10. So when in the game, throws 10, the bug occurs.
